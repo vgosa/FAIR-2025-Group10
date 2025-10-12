@@ -7,6 +7,7 @@
 @prefix csvw:   <http://www.w3.org/ns/csvw#> .
 @prefix exs:    <https://example.org/shapes/> .
 @prefix ex:     <https://example.org/vocab/> .  # predicates/classes for data rows
+@prefix dash:   <http://datashapes.org/dash#> .
 
 # Dataset metadata shape
 exs:DatasetShape
@@ -21,6 +22,18 @@ exs:DatasetShape
     sh:datatype xsd:string ; #TODO: should be sh:nodeKind sh:Literal to allow for language tagged literals?
     sh:minCount 1 ;
     sh:message "Dataset MUST have a dct:title (string)." ;
+    dash:editor dash:TextFieldEditor ;
+    dash:viewer dash:LiteralViewer ;
+    sh:order 0 ;
+  ] ;
+  sh:property [
+    sh:path dct:dateSubmitted ;
+    sh:name "Submission Date" ;
+    sh:datatype xsd:date; #TODO: should be sh:nodeKind sh:Literal to allow for language tagged literals?
+    sh:minCount 1 ;
+    sh:message "Dataset MUST have a dct:title (string)." ;
+    dash:editor dash:DatePickerEditor;
+    sh:order 1 ;
   ] ;
   sh:property [
     sh:path dct:description ;
@@ -28,6 +41,9 @@ exs:DatasetShape
     sh:datatype xsd:string ; #TODO: should be sh:nodeKind sh:Literal to allow for language tagged literals?
     sh:minCount 1 ;
     sh:message "Dataset MUST have a dct:description (string)." ;
+    dash:editor dash:TextFieldEditor ;
+    dash:viewer dash:LiteralViewer ;
+    sh:order 2 ;
   ] ;
   sh:property [
     sh:path dct:creator ;
@@ -35,6 +51,9 @@ exs:DatasetShape
     sh:minCount 1 ;
     sh:nodeKind sh:IRI ;
     sh:message "Dataset MUST have a dct:creator (IRI to person/org/profile)." ;
+    dash:editor dash:URIEditor ;
+    dash:viewer dash:URIViewer ;
+    sh:order 3 ;
   ] ;
   sh:property [
     sh:path dct:license ;
@@ -42,6 +61,21 @@ exs:DatasetShape
     sh:minCount 1 ;
     sh:nodeKind sh:IRI ;
     sh:message "Dataset MUST have a dct:license (IRI, e.g., CC0)." ;
+    sh:defaultValue <https://creativecommons.org/public-domain/cc0/>;
+    dash:editor dash:URIEditor ;
+    dash:viewer dash:URIViewer ;
+    sh:order 4 ;
+  ] ;
+  
+  sh:property [
+    sh:path dcat:keyword ;
+    sh:name "Keyword" ;
+    sh:datatype xsd:string ; #TODO: should be sh:nodeKind sh:Literal to allow for language tagged literals?
+    sh:minCount 0 ;
+    sh:message "Provide some dcat:keyword(s)." ;
+    dash:editor dash:TextFieldEditor ;
+    dash:viewer dash:LiteralViewer ;
+    sh:order 5;
   ] ;
 
   sh:property [
@@ -50,6 +84,9 @@ exs:DatasetShape
     sh:minCount 1 ;
     sh:node exs:DistributionShape ;
     sh:message "Dataset MUST have at least one dcat:distribution conforming to DistributionShape." ;
+    dash:editor dash:DetailsEditor ;
+    dash:viewer dash:DetailsViewer ;
+    sh:order 6;
   ] ;
 
   sh:property [
@@ -58,15 +95,8 @@ exs:DatasetShape
     sh:minCount 1 ;
     sh:node exs:DataDictionaryShape ;
     sh:message "Dataset MUST link via dct:conformsTo to a csvw:TableSchema describing the columns." ;
-  ] ;
-
-  sh:property [
-    sh:path dcat:keyword ;
-    sh:name "Keyword" ;
-    sh:datatype xsd:string ; #TODO: should be sh:nodeKind sh:Literal to allow for language tagged literals?
-    sh:minCount 0 ;
-    sh:message "Provide some dcat:keyword(s)." ;
   ] .
+
 
 
 exs:DistributionShape
@@ -81,13 +111,19 @@ exs:DistributionShape
     sh:datatype xsd:string ;
     sh:minCount 1 ;
     sh:message "Distribution MUST have a dct:title." ;
+    dash:editor dash:TextFieldEditor ;
+    dash:viewer dash:LiteralViewer ;
+    sh:order 0;
   ] ;
   sh:property [
     sh:path dcat:mediaType ;
     sh:name "Media type" ;
-    sh:datatype xsd:string ; #TODO: should be sh:nodeKind sh:IRI?
+    sh:datatype xsd:string; #TODO: should be sh:nodeKind sh:IRI?
     sh:minCount 1 ;
     sh:message "Distribution MUST declare dcat:mediaType (e.g., text/csv)." ;
+    dash:editor dash:TextFieldEditor;
+    dash:viewer dash:LiteralViewer ;
+    sh:order 1;
   ] ;
   sh:property [
     sh:path dct:format ;
@@ -95,6 +131,9 @@ exs:DistributionShape
     sh:datatype xsd:string ; #TODO: should be sh:nodeKind sh:Literal | sh:IRI to allow for language tagged literals?
     sh:minCount 1 ;
     sh:message "Distribution MUST declare dct:format (e.g., CSV)." ;
+    dash:editor dash:TextFieldEditor;
+    dash:viewer dash:LiteralViewer ;
+    sh:order 2;
   ] ;
 
   # At least one downloadURL or accessURL
@@ -105,6 +144,9 @@ exs:DistributionShape
         sh:nodeKind sh:IRI ;
         sh:minCount 1 ;
         sh:message "Provide a direct dcat:downloadURL or an accessURL." ;
+        dash:editor dash:URIEditor;
+        dash:viewer dash:URIViewer;
+        sh:order 3;
       ] ]
     [ sh:property [
         sh:path dcat:accessURL ;
@@ -112,6 +154,9 @@ exs:DistributionShape
         sh:nodeKind sh:IRI ;
         sh:minCount 1 ;
         sh:message "Provide an dcat:accessURL or a direct downloadURL." ;
+        dash:editor dash:URIEditor;
+        dash:viewer dash:URIViewer;
+        sh:order 3;
       ] ]
   ) .
 
