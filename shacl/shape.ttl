@@ -1,0 +1,243 @@
+@prefix sh:     <http://www.w3.org/ns/shacl#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix dcat:   <http://www.w3.org/ns/dcat#> .
+@prefix dct:    <http://purl.org/dc/terms/> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+@prefix csvw:   <http://www.w3.org/ns/csvw#> .
+@prefix exs:    <https://example.org/shapes/> .
+@prefix ex:     <https://example.org/vocab/> .  # predicates/classes for data rows
+
+# Dataset metadata shape
+exs:DatasetShape
+  a sh:NodeShape ;
+  rdfs:label "Dataset metadata shape"@en ;
+  rdfs:comment "Validates core FAIR/DCAT metadata for a dataset."@en ;
+  sh:targetClass dcat:Dataset ;
+
+  sh:property [
+    sh:path dct:title ;
+    sh:name "Title" ;
+    sh:datatype xsd:string ; #TODO: should be sh:nodeKind sh:Literal to allow for language tagged literals?
+    sh:minCount 1 ;
+    sh:message "Dataset MUST have a dct:title (string)." ;
+  ] ;
+  sh:property [
+    sh:path dct:description ;
+    sh:name "Description" ;
+    sh:datatype xsd:string ; #TODO: should be sh:nodeKind sh:Literal to allow for language tagged literals?
+    sh:minCount 1 ;
+    sh:message "Dataset MUST have a dct:description (string)." ;
+  ] ;
+  sh:property [
+    sh:path dct:creator ;
+    sh:name "Creator" ;
+    sh:minCount 1 ;
+    sh:nodeKind sh:IRI ;
+    sh:message "Dataset MUST have a dct:creator (IRI to person/org/profile)." ;
+  ] ;
+  sh:property [
+    sh:path dct:license ;
+    sh:name "License" ;
+    sh:minCount 1 ;
+    sh:nodeKind sh:IRI ;
+    sh:message "Dataset MUST have a dct:license (IRI, e.g., CC0)." ;
+  ] ;
+
+  sh:property [
+    sh:path dcat:distribution ;
+    sh:name "Distribution" ;
+    sh:minCount 1 ;
+    sh:node exs:DistributionShape ;
+    sh:message "Dataset MUST have at least one dcat:distribution conforming to DistributionShape." ;
+  ] ;
+
+  sh:property [
+    sh:path dct:conformsTo ;
+    sh:name "Data dictionary (TableSchema)" ;
+    sh:minCount 1 ;
+    sh:node exs:DataDictionaryShape ;
+    sh:message "Dataset MUST link via dct:conformsTo to a csvw:TableSchema describing the columns." ;
+  ] ;
+
+  sh:property [
+    sh:path dcat:keyword ;
+    sh:name "Keyword" ;
+    sh:datatype xsd:string ; #TODO: should be sh:nodeKind sh:Literal to allow for language tagged literals?
+    sh:minCount 0 ;
+    sh:message "Provide some dcat:keyword(s)." ;
+  ] .
+
+
+exs:DistributionShape
+  a sh:NodeShape ;
+  rdfs:label "Distribution metadata shape"@en ;
+  rdfs:comment "Validates core metadata for a dataset distribution (file/API)."@en ;
+  sh:targetClass dcat:Distribution ;
+
+  sh:property [
+    sh:path dct:title ;
+    sh:name "Distribution title" ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:message "Distribution MUST have a dct:title." ;
+  ] ;
+  sh:property [
+    sh:path dcat:mediaType ;
+    sh:name "Media type" ;
+    sh:datatype xsd:string ; #TODO: should be sh:nodeKind sh:IRI?
+    sh:minCount 1 ;
+    sh:message "Distribution MUST declare dcat:mediaType (e.g., text/csv)." ;
+  ] ;
+  sh:property [
+    sh:path dct:format ;
+    sh:name "Format" ;
+    sh:datatype xsd:string ; #TODO: should be sh:nodeKind sh:Literal | sh:IRI to allow for language tagged literals?
+    sh:minCount 1 ;
+    sh:message "Distribution MUST declare dct:format (e.g., CSV)." ;
+  ] ;
+
+  # At least one downloadURL or accessURL
+  sh:or (
+    [ sh:property [
+        sh:path dcat:downloadURL ;
+        sh:name "Download URL" ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 1 ;
+        sh:message "Provide a direct dcat:downloadURL or an accessURL." ;
+      ] ]
+    [ sh:property [
+        sh:path dcat:accessURL ;
+        sh:name "Access URL" ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 1 ;
+        sh:message "Provide an dcat:accessURL or a direct downloadURL." ;
+      ] ]
+  ) .
+
+#TODO: should we add "enum-like" checks for columns such as mood, weather, etc?
+exs:DataDictionaryShape
+  a sh:NodeShape ;
+  rdfs:label "CSVW TableSchema for Fitness Tracker columns"@en ;
+  rdfs:comment "Ensures the schema lists required columns with expected datatypes."@en ;
+  sh:targetClass csvw:Schema ;
+
+  sh:property [
+    sh:path csvw:column ;
+    sh:qualifiedValueShape [
+      sh:property [ sh:path csvw:name ;     sh:hasValue "user_id" ] ;
+      sh:property [ sh:path csvw:datatype ; sh:hasValue "string" ] ;
+    ] ;
+    sh:qualifiedMinCount 1 ;
+    sh:message "Missing column 'user_id' with datatype string." ;
+  ] ;
+
+  sh:property [
+    sh:path csvw:column ;
+    sh:qualifiedValueShape [
+      sh:property [ sh:path csvw:name ;     sh:hasValue "date" ] ;
+      sh:property [ sh:path csvw:datatype ; sh:hasValue "date" ] ;
+    ] ;
+    sh:qualifiedMinCount 1 ;
+    sh:message "Missing column 'date' with datatype date (YYYY-MM-DD)." ;
+  ] ;
+
+  sh:property [
+    sh:path csvw:column ;
+    sh:qualifiedValueShape [
+      sh:property [ sh:path csvw:name ;     sh:hasValue "steps" ] ;
+      sh:property [ sh:path csvw:datatype ; sh:hasValue "integer" ] ;
+    ] ;
+    sh:qualifiedMinCount 1 ;
+    sh:message "Missing column 'steps' with datatype integer." ;
+  ] ;
+
+  sh:property [
+    sh:path csvw:column ;
+    sh:qualifiedValueShape [
+      sh:property [ sh:path csvw:name ;     sh:hasValue "calories_burned" ] ;
+      sh:property [ sh:path csvw:datatype ; sh:hasValue "decimal" ] ;
+    ] ;
+    sh:qualifiedMinCount 1 ;
+    sh:message "Missing column 'calories_burned' with datatype decimal." ;
+  ] ;
+
+  sh:property [
+    sh:path csvw:column ;
+    sh:qualifiedValueShape [
+      sh:property [ sh:path csvw:name ;     sh:hasValue "distance_km" ] ;
+      sh:property [ sh:path csvw:datatype ; sh:hasValue "decimal" ] ;
+    ] ;
+    sh:qualifiedMinCount 1 ;
+    sh:message "Missing column 'distance_km' with datatype decimal." ;
+  ] ;
+
+  sh:property [
+    sh:path csvw:column ;
+    sh:qualifiedValueShape [
+      sh:property [ sh:path csvw:name ;     sh:hasValue "active_minutes" ] ;
+      sh:property [ sh:path csvw:datatype ; sh:hasValue "integer" ] ;
+    ] ;
+    sh:qualifiedMinCount 1 ;
+    sh:message "Missing column 'active_minutes' with datatype integer." ;
+  ] ;
+
+  sh:property [
+    sh:path csvw:column ;
+    sh:qualifiedValueShape [
+      sh:property [ sh:path csvw:name ;     sh:hasValue "sleep_hours" ] ;
+      sh:property [ sh:path csvw:datatype ; sh:hasValue "decimal" ] ;
+    ] ;
+    sh:qualifiedMinCount 1 ;
+    sh:message "Missing column 'sleep_hours' with datatype decimal." ;
+  ] ;
+
+  sh:property [
+    sh:path csvw:column ;
+    sh:qualifiedValueShape [
+      sh:property [ sh:path csvw:name ;     sh:hasValue "heart_rate_avg" ] ;
+      sh:property [ sh:path csvw:datatype ; sh:hasValue "integer" ] ;
+    ] ;
+    sh:qualifiedMinCount 1 ;
+    sh:message "Missing column 'heart_rate_avg' with datatype integer." ;
+  ] ;
+
+  sh:property [
+    sh:path csvw:column ;
+    sh:qualifiedValueShape [
+      sh:property [ sh:path csvw:name ;     sh:hasValue "workout_type" ] ;
+      sh:property [ sh:path csvw:datatype ; sh:hasValue "string" ] ;
+    ] ;
+    sh:qualifiedMinCount 1 ;
+    sh:message "Missing column 'workout_type' with datatype string." ;
+  ] ;
+
+  sh:property [
+    sh:path csvw:column ;
+    sh:qualifiedValueShape [
+      sh:property [ sh:path csvw:name ;     sh:hasValue "weather_conditions" ] ;
+      sh:property [ sh:path csvw:datatype ; sh:hasValue "string" ] ;
+    ] ;
+    sh:qualifiedMinCount 1 ;
+    sh:message "Missing column 'weather_conditions' with datatype string." ;
+  ] ;
+
+  sh:property [
+    sh:path csvw:column ;
+    sh:qualifiedValueShape [
+      sh:property [ sh:path csvw:name ;     sh:hasValue "location" ] ;
+      sh:property [ sh:path csvw:datatype ; sh:hasValue "string" ] ;
+    ] ;
+    sh:qualifiedMinCount 1 ;
+    sh:message "Missing column 'location' with datatype string." ;
+  ] ;
+
+  sh:property [
+    sh:path csvw:column ;
+    sh:qualifiedValueShape [
+      sh:property [ sh:path csvw:name ;     sh:hasValue "mood" ] ;
+      sh:property [ sh:path csvw:datatype ; sh:hasValue "string" ] ;
+    ] ;
+    sh:qualifiedMinCount 1 ;
+    sh:message "Missing column 'mood' with datatype string." ;
+  ] .
