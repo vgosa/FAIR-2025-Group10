@@ -1,0 +1,64 @@
+@prefix dcat: <http://www.w3.org/ns/dcat#>.
+@prefix dcite: <http://purl.org/spar/datacite/>.
+@prefix dct: <http://purl.org/dc/terms/>.
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+@prefix language: <http://id.loc.gov/vocabulary/iso639-1/>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix sio: <http://semanticscience.org/resource/>.
+@prefix wd: <https://www.wikidata.org/wiki/>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix d: <http://localhost:8080/dataset/>.
+@prefix n0: <http://localhost:8080/dataset/8365652f-7c72-407f-86c4-58ff68d81e7c#>.
+@prefix pro: <http://localhost:8080/profile/>.
+@prefix c: <http://localhost:8080/catalog/>.
+@prefix met: <http://localhost:8080/dataset/8365652f-7c72-407f-86c4-58ff68d81e7c/metrics/>.
+@prefix dis: <http://localhost:8080/distribution/>.
+@prefix obo: <http://purl.obolibrary.org/obo/>.
+@prefix fdp: <https://w3id.org/fdp/fdp-o#>.
+@prefix ldp: <http://www.w3.org/ns/ldp#>.
+
+d:8365652f-7c72-407f-86c4-58ff68d81e7c
+    a dcat:Dataset, dcat:Resource;
+    dct:accessRights n0:accessRights;
+    dct:conformsTo pro:2f08228e-1789-40f8-84cd-28e3288c3604;
+    dct:description
+        "Fitness Tracker Dataset sourced from Kaggle. This synthetic dataset simulates daily fitness and wellness data collected from wearable devices and mobile apps.";
+    dct:isPartOf c:dd8c4af0-274f-46c0-8d25-2dd01a76b022;
+    dct:issued "2025-10-12T11:56:00Z"^^xsd:dateTime;
+    dct:language language:en;
+    dct:license <http://purl.org/NET/rdflicense/cc-zero1.0>;
+    dct:modified "2025-10-12T11:56:00Z"^^xsd:dateTime;
+    dct:publisher [ a foaf:Agent; foaf:name "Group 10" ];
+    dct:title "Fitness Tracker Dataset";
+    sio:SIO_000628
+    met:445c0a70d1e214e545b261559e2842f4, met:5d27e854a9e78eb3f663331cd47cdc13;
+    rdfs:label "Fitness Tracker Dataset";
+    dcat:distribution
+        dis:559ab963-5df3-4854-9466-72570ba00316,
+        dis:f42927c3-e257-4ca9-be68-9c46bdce3925;
+    dcat:theme obo:ExO_0000108;
+    dcat:version "1.0.0";
+    fdp:metadataIdentifier n0:identifier;
+    fdp:metadataIssued "2025-10-12T13:26:13.359753575Z"^^xsd:dateTime;
+    fdp:metadataModified "2025-10-14T09:39:56.352698778Z"^^xsd:dateTime.
+met:445c0a70d1e214e545b261559e2842f4
+    sio:SIO_000332 <https://www.ietf.org/rfc/rfc3986.txt>;
+    sio:SIO_000628 <https://www.ietf.org/rfc/rfc3986.txt>.
+met:5d27e854a9e78eb3f663331cd47cdc13
+sio:SIO_000332 wd:Q8777; sio:SIO_000628 wd:Q8777.
+n0:accessRights
+    a dct:RightsStatement;
+    dct:description "This resource has no access restriction".
+n0:identifier
+    a dcite:Identifier;
+    dct:identifier
+    "http://localhost:8080/dataset/8365652f-7c72-407f-86c4-58ff68d81e7c".
+dis:
+    a ldp:DirectContainer;
+    dct:title "Distributions";
+    ldp:contains
+        dis:559ab963-5df3-4854-9466-72570ba00316,
+        dis:f42927c3-e257-4ca9-be68-9c46bdce3925;
+    ldp:hasMemberRelation dcat:distribution;
+    ldp:membershipResource d:8365652f-7c72-407f-86c4-58ff68d81e7c.
+pro:2f08228e-1789-40f8-84cd-28e3288c3604 rdfs:label "Dataset Profile".
