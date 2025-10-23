@@ -1,0 +1,76 @@
+digraph G {
+    graph [
+        mindist=0.7
+        overlap=prism
+        overlap_scaling=-2.0
+        ]
+    
+    Activity[color = blue]
+    Agent[color=blue]
+    Calorie[color=blue]
+    Hour[color=blue]
+    Minute[color=blue]
+    
+    _Person[color = green]
+    _Mood[color=green]
+    _Calorie[color=green]
+    _Sleep[color=green]
+    _HR[color=green]
+    _Duration[color=green]
+    _Distance[color=green]
+    _Steps[color=green]
+    _KM[color=green]
+    _Location[color=green]
+    
+    user_id [shape=box]
+    mood [shape=box]
+    calories[shape=box]
+    sleep_hours[shape=box]
+    heart_rate[shape=box]
+    date[shape=box]
+    active_mins[shape=box]
+    dist_km[shape=box]
+    steps[shape=box]
+    location[shape=box]
+    weather_condition[shape=box]
+    workout_type[shape=box]
+    
+    
+ Activity -> _Person [label="performed"]
+ Activity -> _Duration[label="sosa:observedProperty"]
+ Activity -> _Distance[label="sosa:observedProperty"]
+ Activity -> _Location[label="occursIn"]
+ Activity -> date [label="dct:date"]
+ Activity -> workout_type[label="dct:type"]
+ 
+ _Person -> user_id[label="identifier"]
+ _Person -> Agent[label="of type"]
+ _Person -> _Mood[label="had context"]
+ _Person -> _Calorie[label="calories burned"]
+ _Person -> _Sleep[label="had context"]
+ _Person -> _HR[label="generated"]
+ 
+ 
+ _HR -> heart_rate[label="average"]
+ 
+ _Sleep -> Hour[label="qudt:unit"]
+ _Sleep -> sleep_hours[label="owl:hasValue"]
+ 
+ _Calorie -> calories[label="owl:hasValue"]
+ _Calorie -> Calorie[label="qudt:unit"]
+ 
+ _Mood -> mood[label="owl:hasValue"]
+ 
+ _Duration -> active_mins[label="owl:hasValue"]
+ _Duration -> Minute[label="qudt:unit"]
+ 
+ _Distance -> _Steps[label="hasMeasurement"]
+ _Distance -> _KM[label="hasMeasurement"]
+ 
+ _Steps -> steps[label="owl:hasValue"]
+ _KM -> dist_km[label="owl:hasValue"]
+ 
+ _Location -> location[label="owl:hasValue"]
+ _Location -> weather_condition[label="sosa:observedProperty"]
+ 
+}
