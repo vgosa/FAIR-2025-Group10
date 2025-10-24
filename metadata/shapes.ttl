@@ -70,7 +70,7 @@ exs:DatasetShape
   sh:property [
     sh:path dcat:keyword ;
     sh:name "Keyword" ;
-    sh:datatype xsd:string ; #TODO: should be sh:nodeKind sh:Literal to allow for language tagged literals?
+    sh:datatype xsd:string ;
     sh:minCount 0 ;
     sh:message "Provide some dcat:keyword(s)." ;
     dash:editor dash:TextFieldEditor ;
@@ -128,7 +128,7 @@ exs:DistributionShape
   sh:property [
     sh:path dct:format ;
     sh:name "Format" ;
-    sh:datatype xsd:string ; #TODO: should be sh:nodeKind sh:Literal | sh:IRI to allow for language tagged literals?
+    sh:datatype xsd:string ;
     sh:minCount 1 ;
     sh:message "Distribution MUST declare dct:format (e.g., CSV)." ;
     dash:editor dash:TextFieldEditor;
@@ -160,7 +160,6 @@ exs:DistributionShape
       ] ]
   ) .
 
-#TODO: should we add "enum-like" checks for columns such as mood, weather, etc?
 exs:DataDictionaryShape
   a sh:NodeShape ;
   rdfs:label "CSVW TableSchema for Fitness Tracker columns"@en ;

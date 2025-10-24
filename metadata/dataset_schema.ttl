@@ -1,0 +1,84 @@
+@prefix :         <http://fairdatapoint.org/> .
+@prefix dash:     <http://datashapes.org/dash#> .
+@prefix dcat:     <http://www.w3.org/ns/dcat#> .
+@prefix dct:      <http://purl.org/dc/terms/> .
+@prefix sh:       <http://www.w3.org/ns/shacl#> .
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+
+:DatasetShape a sh:NodeShape ;
+  sh:targetClass dcat:Dataset ;
+  rdfs:label "Dataset metadata shape"@en ;
+  rdfs:comment "Validates core FAIR/DCAT metadata for a dataset."@en ;
+  sh:property [
+    sh:path dct:title ;
+    sh:name "Title" ;
+    sh:datatype xsd:string ; #TODO: should be sh:nodeKind sh:Literal to allow for language tagged literals?
+    sh:minCount 1 ;
+    sh:message "Dataset MUST have a dct:title (string)." ;
+    dash:editor dash:TextFieldEditor ;
+    dash:viewer dash:LiteralViewer ;
+    sh:order 0 ;
+  ] , [
+    sh:path dct:issued;
+    sh:datatype xsd:dateTime ;
+    sh:maxCount 1 ;
+    dash:editor dash:DateTimePickerEditor ;
+    dash:viewer dash:LiteralViewer ;
+    sh:message "Dataset MUST have a dct:issued (datetime)." ;
+    sh:order 20 ;
+  ], [
+    sh:path dct:modified ;
+    sh:datatype xsd:dateTime ;
+    sh:maxCount 1 ;
+    dash:editor dash:DateTimePickerEditor ;
+    dash:viewer dash:LiteralViewer ;
+    sh:message "Dataset MUST have a dct:modified (datetime)." ;
+    sh:order 21 ;
+  ], [
+  sh:path dct:description ;
+    sh:name "Description" ;
+    sh:datatype xsd:string ; #TODO: should be sh:nodeKind sh:Literal to allow for language tagged literals?
+    sh:minCount 1 ;
+    sh:message "Dataset MUST have a dct:description (string)." ;
+    dash:editor dash:TextFieldEditor ;
+    dash:viewer dash:LiteralViewer ;
+    sh:order 2 ;
+    ], [
+    sh:path dcat:theme ;
+    sh:nodeKind sh:IRI ;
+    sh:minCount 1 ;
+    dash:editor dash:URIEditor ;
+    dash:viewer dash:LabelViewer ;
+    sh:message "Dataset MUST have a dct:theme (IRI)." ;
+    sh:order 22 ;
+  ], [
+    sh:path dcat:contactPoint ;
+    sh:nodeKind sh:IRI ;
+    sh:maxCount 1 ;
+    sh:minCount 1 ;
+    dash:editor dash:URIEditor ;
+    dash:viewer dash:LabelViewer ;
+    sh:message "Dataset MUST have a dct:contactPoint (IRI to person/org/profile)." ;
+    sh:order 23 ;
+  ], [
+    sh:path dcat:keyword ;
+    sh:nodeKind sh:Literal ;
+    dash:editor dash:TextFieldEditor ;
+    dash:viewer dash:LiteralViewer ;
+    sh:order 24 ;
+  ], [
+    sh:path dcat:landingPage ;
+    sh:nodeKind sh:IRI ;
+    sh:maxCount 1 ;
+    dash:editor dash:URIEditor ;
+    dash:viewer dash:LabelViewer ;
+    sh:order 25 ;
+  ], [
+    sh:path dct:source;
+    sh:nodeKind sh:IRI ;
+    sh:maxCount 1;
+    dash:editor dash:URIEditor;
+    dash:viewer dash:LabelViewer;
+    sh:order 26;
+  ] .
