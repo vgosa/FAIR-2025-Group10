@@ -12,4 +12,8 @@ The dataset is accompanied by metadata files that provide explicit definitions f
 The shape graph for the dataset is available in the `metadata` directory in the `shapes.ttl` file. The SHACL code can be used to validate the dataset against the defined shapes using a SHACL validation tool.
 
 ## Visualizations
-The `visualization` directory contains a PNG image (`visualization/rdf_visual_representation.png`) that provides a visual representation of the first row of the dataset in RDF format. This visualization helps to understand how the data is structured and related in RDF.
+### Semantic Model
+![Semantic Model in dot format](https://raw.githubusercontent.com/vgosa/FAIR-2025-Group10/main/visualization/rdf_skeleton.png)
+
+### RDF Instance Visualisation
+![Visualization of an instance in our FAIRified dataset](https://raw.githubusercontent.com/vgosa/FAIR-2025-Group10/main/visualization/rdf_visual_representation.png)
