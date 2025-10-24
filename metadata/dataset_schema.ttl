@@ -74,4 +74,11 @@
     dash:editor dash:URIEditor ;
     dash:viewer dash:LabelViewer ;
     sh:order 25 ;
+  ], [
+    sh:path dct:source;
+    sh:nodeKind sh:IRI ;
+    sh:maxCount 1;
+    dash:editor dash:URIEditor;
+    dash:viewer dash:LabelViewer;
+    sh:order 26;
   ] .

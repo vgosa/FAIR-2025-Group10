@@ -12,6 +12,7 @@
 @prefix pro: <http://localhost:8080/profile/>.
 @prefix d: <http://localhost:8080/dataset/>.
 @prefix met: <http://localhost:8080/distribution/559ab963-5df3-4854-9466-72570ba00316/metrics/>.
+@prefix gro: <https://w3id.org/FAIR-course-UT/2025-2026/group10/>.
 @prefix fdp: <https://w3id.org/fdp/fdp-o#>.
 
 dis:559ab963-5df3-4854-9466-72570ba00316
@@ -29,17 +30,15 @@ dis:559ab963-5df3-4854-9466-72570ba00316
     sio:SIO_000628
     met:445c0a70d1e214e545b261559e2842f4, met:5d27e854a9e78eb3f663331cd47cdc13;
     rdfs:label "Kaggle Activity Tracker Turtle";
-    dcat:accessURL
-        <https://raw.githubusercontent.com/vgosa/FAIR-2025-Group10/refs/heads/main/data/fitness-tracker-subset.ttl>;
+    dcat:accessURL gro:data;
     dcat:byteSize "28MB";
-    dcat:downloadURL
-        <https://raw.githubusercontent.com/vgosa/FAIR-2025-Group10/refs/heads/main/data/fitness-tracker-subset.ttl>;
+    dcat:downloadURL gro:data;
     dcat:format "text/turtle";
     dcat:mediaType "text/turtle";
     dcat:version "1.0.0";
     fdp:metadataIdentifier n0:identifier;
     fdp:metadataIssued "2025-10-14T09:39:56.122079471Z"^^xsd:dateTime;
-    fdp:metadataModified "2025-10-14T09:39:56.122079471Z"^^xsd:dateTime.
+    fdp:metadataModified "2025-10-24T09:14:55.607060097Z"^^xsd:dateTime.
 met:445c0a70d1e214e545b261559e2842f4
     sio:SIO_000332 <https://www.ietf.org/rfc/rfc3986.txt>;
     sio:SIO_000628 <https://www.ietf.org/rfc/rfc3986.txt>.
