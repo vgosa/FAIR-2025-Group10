@@ -4,7 +4,8 @@
 @prefix dct:      <http://purl.org/dc/terms/> .
 @prefix sh:       <http://www.w3.org/ns/shacl#> .
 @prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
-@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nih:      <http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#> .
 
 :DatasetShape a sh:NodeShape ;
   sh:targetClass dcat:Dataset ;
@@ -81,4 +82,14 @@
     dash:editor dash:URIEditor;
     dash:viewer dash:LabelViewer;
     sh:order 26;
+  ],
+  [
+    sh:path nih:C176263 ;
+    sh:name "Synthetic Data" ;
+    sh:datatype xsd:boolean ;
+    sh:maxCount 1;
+    sh:defaultValue "false"^^xsd:boolean ;
+    dash:editor dash:BooleanSelectEditor ;
+    dash:viewer dash:LiteralViewer;
+    sh:order 27;
   ] .

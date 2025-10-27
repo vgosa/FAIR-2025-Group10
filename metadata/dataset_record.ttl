@@ -8,6 +8,7 @@
 @prefix wd: <https://www.wikidata.org/wiki/>.
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
 @prefix d: <http://localhost:8080/dataset/>.
+@prefix Thes: <http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#>.
 @prefix n0: <http://localhost:8080/dataset/8365652f-7c72-407f-86c4-58ff68d81e7c#>.
 @prefix pro: <http://localhost:8080/profile/>.
 @prefix c: <http://localhost:8080/catalog/>.
@@ -20,6 +21,7 @@
 
 d:8365652f-7c72-407f-86c4-58ff68d81e7c
     a dcat:Dataset, dcat:Resource;
+    Thes:C176263 true;
     dct:accessRights n0:accessRights;
     dct:conformsTo pro:2f08228e-1789-40f8-84cd-28e3288c3604;
     dct:description
@@ -44,7 +46,7 @@ d:8365652f-7c72-407f-86c4-58ff68d81e7c
     dcat:version "1.0.0";
     fdp:metadataIdentifier n0:identifier;
     fdp:metadataIssued "2025-10-12T13:26:13.359753575Z"^^xsd:dateTime;
-    fdp:metadataModified "2025-10-24T09:10:14.838617392Z"^^xsd:dateTime.
+    fdp:metadataModified "2025-10-27T11:15:45.886078612Z"^^xsd:dateTime.
 met:445c0a70d1e214e545b261559e2842f4
     sio:SIO_000332 <https://www.ietf.org/rfc/rfc3986.txt>;
     sio:SIO_000628 <https://www.ietf.org/rfc/rfc3986.txt>.
