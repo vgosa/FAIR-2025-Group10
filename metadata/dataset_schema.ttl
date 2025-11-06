@@ -92,4 +92,13 @@
     dash:editor dash:BooleanSelectEditor ;
     dash:viewer dash:LiteralViewer;
     sh:order 27;
+  ],
+  [
+    sh:path nih:C81930 ;
+    sh:name "Use Cases" ;
+    sh:datatype xsd:literal;
+    sh:minCount 1;
+    dash:editor dash:TextFieldEditor ;
+    dash:viewer dash:LiteralViewer ;
+    sh:order 28;
   ] .

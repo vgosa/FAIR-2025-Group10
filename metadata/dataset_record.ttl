@@ -22,6 +22,15 @@
 d:8365652f-7c72-407f-86c4-58ff68d81e7c
     a dcat:Dataset, dcat:Resource;
     Thes:C176263 true;
+    Thes:C81930
+        "Analyze how weather affects physical activity"^^xsd:literal,
+        "Build models to predict mood or calorie burn"^^xsd:literal,
+        "Exploratory data analysis projects"^^xsd:literal,
+        "Find patterns between sleep, mood, and workouts"^^xsd:literal,
+        "Health tracking dashboards"^^xsd:literal,
+        "Mood prediction using physical and lifestyle data"^^xsd:literal,
+        "Personalized fitness recommendations"^^xsd:literal,
+        "Study fitness trends across locations or user groups"^^xsd:literal;
     dct:accessRights n0:accessRights;
     dct:conformsTo pro:2f08228e-1789-40f8-84cd-28e3288c3604;
     dct:description
@@ -46,7 +55,7 @@ d:8365652f-7c72-407f-86c4-58ff68d81e7c
     dcat:version "1.0.0";
     fdp:metadataIdentifier n0:identifier;
     fdp:metadataIssued "2025-10-12T13:26:13.359753575Z"^^xsd:dateTime;
-    fdp:metadataModified "2025-10-27T11:15:45.886078612Z"^^xsd:dateTime.
+    fdp:metadataModified "2025-11-06T11:05:57.503566063Z"^^xsd:dateTime.
 met:445c0a70d1e214e545b261559e2842f4
     sio:SIO_000332 <https://www.ietf.org/rfc/rfc3986.txt>;
     sio:SIO_000628 <https://www.ietf.org/rfc/rfc3986.txt>.
